@@ -1,10 +1,5 @@
-@font-face {
-  font-family: 'Roxaine';
-  src: url('assets/RoxaineSerif_PERSONAL_USE_ONLY.otf');
-}
-
 body { 
-    font-family: 'Roxaine', sans-serif; 
+    font-family: Arial, Helvetica, sans-serif; 
     background-color: #ffdae5; 
     padding: 20px; 
     display: flex; 
@@ -53,7 +48,7 @@ button:hover {
     transition: color 0.2s ease;
 }
 .stars i.selected { 
-    color: rgb(0, 0, 0); 
+    color: rgb(0, 0, 0);
 }
 
 hr {
