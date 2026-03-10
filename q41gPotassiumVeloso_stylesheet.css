@@ -1,5 +1,10 @@
+@font-face {
+  font-family: 'Roxaine';
+  src: url('assets/RoxaineSerif_PERSONAL_USE_ONLY.otf');
+}
+
 body { 
-    font-family: sans-serif; 
+    font-family: 'Roxaine', sans-serif; 
     background-color: #ffdae5; 
     padding: 20px; 
     display: flex; 
@@ -7,7 +12,7 @@ body {
     align-items: center;
 }
 .container { 
-    max-width: 800px; 
+    width: 400px; 
     background: rgb(255, 165, 198); 
     padding: 20px; 
     border-radius: 8px; 
@@ -19,7 +24,7 @@ label {
     margin-top: 10px; 
     font-weight: bold; 
 }
-input, select, button { 
+input, button { 
     width: 100%; 
     padding: 8px; 
     margin-top: 5px; 
@@ -40,19 +45,19 @@ button:hover {
     background-color: #f76296; 
 }
 
-.star-rating { 
+.stars i { 
     font-size: 24px;  
     color: #ffdae5; 
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
+    cursor: pointer; 
+    transition: color 0.2s ease;
 }
-.star.selected { 
-    color: gold; 
+.stars i.selected { 
+    color: rgb(0, 0, 0); 
 }
 
-.movie-item { 
-    border-bottom: 1px solid #eee; 
-    padding: 10px 0; 
-}
-.movie-item .stars { 
-    color: gold; 
+hr {
+    height: 5px;
+    border: none;
+    background-color: #000000;
 }
