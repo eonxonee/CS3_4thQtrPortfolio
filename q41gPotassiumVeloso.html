@@ -105,7 +105,7 @@
 
     <script>
         const stars = document.querySelectorAll('.stars i');
-        let movieList = JSON.parse(localStorage.getItem('movieList') || '[]') || [];
+        let movieList = JSON.parse(localStorage.getItem('movieList') || '[]');
         const title = document.getElementById('title');
         const year = document.getElementById('year');
         const genre = document.getElementById('genre');
