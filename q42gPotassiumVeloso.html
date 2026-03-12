@@ -105,58 +105,95 @@
 
     <script>
         const stars = document.querySelectorAll('.stars i');
-        let movieList = JSON.parse(localStorage.getItem('movieList') || '[]') || [];
-        const title = document.getElementById('title');
-        const year = document.getElementById('year');
-        const genre = document.getElementById('genre');
+        const titleInput = document.getElementById('title');
+        const yearInput = document.getElementById('year');
+        const genreInput = document.getElementById('genre');
         const movieListContainer = document.getElementById('movieList');
+        
+        let movieList = JSON.parse(localStorage.getItem('movieList')) || [];
+        let currentRating = 0;
 
+        // star rating
+        stars.forEach((star) => {
+            star.addEventListener("click", () => {
+                currentRating = parseInt(star.getAttribute('data-value'));
+                updateStarUI(currentRating);
+            });
+        });
+
+        function updateStarUI(rating) {
+            stars.forEach((s, idx) => {
+                s.classList.toggle("selected", idx < rating);
+            });
+        }
+
+        // render list
         function renderMovieList() {
             movieListContainer.innerHTML = '';
-            movieList = Array.isArray(movieList) ? movieList : [];
-
-            movieList.forEach((movie) => {
-                const { title = '', year = '', genre = '', rating = 0 } = movie || {};
-                const starsText = '★'.repeat(Number(rating) || 0) || 'No rating';
+            movieList.forEach((movie, index) => {
                 const div = document.createElement('div');
-                div.textContent = `${title} (${year}) - ${genre} - ${starsText}`;
+                div.className = 'movie-item';
+                
+                // average rating
+                const displayStars = "★".repeat(Math.round(movie.rating)) + "☆".repeat(5 - Math.round(movie.rating));
+                
+                div.innerHTML = `
+                    <div class="movie-info">
+                        <strong>${movie.title}</strong> (${movie.year}) - ${movie.genre}, Rating: <span style="color: #ffc107">${displayStars}</span>
+                    </div>
+                    <button class="delete-btn" onclick="deleteMovie(${index})">Delete</button>
+                `;
                 movieListContainer.appendChild(div);
             });
         }
 
-        function getRating() {
-            return Array.from(stars).filter(star => star.classList.contains('selected')).length;
-        }
-
-        stars.forEach((star, index1) => {
-            star.addEventListener("click", () => {
-                stars.forEach((s, index2) => {
-                    if (index1 >= index2) {
-                        s.classList.add("selected");
-                    } else {
-                        s.classList.remove("selected");
-                    }
-                });
-            });
-        });
-
-        document.getElementById('addMovieBtn').addEventListener('click', (event) => {
+        // average or add
+        document.getElementById('movieForm').addEventListener('submit', (event) => {
             event.preventDefault();
 
-            const movie = {
-                title: title.value,
-                year: year.value,
-                genre: genre.value,
-                rating: getRating()
-            };
+            const title = titleInput.value.trim();
+            const year = yearInput.value;
+            const genre = genreInput.value;
 
-            movieList.push(movie);
+            if (currentRating === 0) {
+                alert("Please select a rating!");
+                return;
+            }
+
+            // find movie
+            const existingIndex = movieList.findIndex(m => m.title.toLowerCase() === title.toLowerCase());
+
+            if (existingIndex !== -1) {
+                movieList[existingIndex].year = year;
+                movieList[existingIndex].genre = genre;
+                movieList[existingIndex].rating = (movieList[existingIndex].rating + currentRating) / 2;
+            } else {
+                // add new
+                movieList.push({ title, year, genre, rating: currentRating });
+            }
+
+            saveAndRefresh();
+            resetForm();
+        });
+
+        // delete movie
+        window.deleteMovie = function(index) {
+            if (confirm("Are you sure you want to delete this movie?")) {
+                movieList.splice(index, 1);
+                saveAndRefresh();
+            }
+        };
+
+        function saveAndRefresh() {
             localStorage.setItem('movieList', JSON.stringify(movieList));
             renderMovieList();
+        }
 
+        function resetForm() {
             document.getElementById('movieForm').reset();
-            stars.forEach(s => s.classList.remove('selected'));
-        });
+            currentRating = 0;
+            updateStarUI(0);
+        }
 
         renderMovieList();
     </script>
