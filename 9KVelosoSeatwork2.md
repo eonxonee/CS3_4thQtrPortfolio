@@ -57,17 +57,23 @@
 
 - Guided Question: What changed compared to the default static positioning? Try to give different values to top and left or you can change it to bottom, right.
 
+- ANSWER: The sidebar moved down to the right relative to its normal positioning.
+
 ### Step 2 (Fixed):
 
 - Add in css ```position: fixed; bottom: 0; width: 100%;``` to .footer.
 
 - Guided Question: What happens when you scroll the page? Why does the footer behave differently from position relative?
 
+- ANSWER: The footer remains fixed on the bottom of the page when scrolling. Since its position is fixed, it does not rely on other elements to determine its location. 
+
 ### Step 3 (Absolute):
 
 - Add in css ```position: absolute; top: 66px; left: 200px;``` to .content.
 
 - Guided Question: What is the effect of position: absolute on an element? How is it different from fixed?
+
+- ANSWER: Position: absolute makes an element's location dependent on its nearest positioned ancestor, unlike fixed position, which sets it to a specific position regardless of other elements.
 
 ### Step 4 : (Absolute)
 
@@ -88,10 +94,14 @@
 
 - Guided Question: Why does the notice appear on top of the content? What happens if you swap the z‑index values?
 
+- ANSWER: The notice appears on top of the content because it has a larger z-index. When the values are swapped, it brings the content forward and the notice behind it.
+
 - Challenge: 
     * What changes that you have to do on the code that will position .notice box on the top right corner of the .content box? Please write the code on paper as well (both html and css on the part of .notice and .content).
     * Try to change the position of .content to relative then to fixed. What do you observed each time?
     * What do you observe on about the effect of z-index on .notice and .content boxes?
+
+    * 
 
 3. Please answer the following reflection questions (15 minutes)
 
@@ -102,3 +112,16 @@
     c. How do you differentiate sticky from fixed (you can research on sticky)?
 
     d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.
+
+  ANSWERS:
+
+    a. Static: default positioning
+       Relative: relative to its normal position
+       Absolute: relative to its nearest positioned ancestor
+       Fixed: relative to viewport
+    
+    b. Absolute positioning makes the element's position relative to the nearest ancestor element with static, relative, or fixed position. The values (top, bottom, left, right) determine how far it is from said ancestor element.
+
+    c. Fixed position elements do not move no matter how much a user scrolls, while sticky positioning makes the element move normally until it reaches a specific point, then making it fixed.
+
+    d. For the main navigation bar, I will use the fixed position so it can easily be accessed by the user. For sub-events or more details about the main school event, I will use static positioning. For buttons encouraging signup, I will use sticky positioning so as the user scrolls, they might reconsider. 
