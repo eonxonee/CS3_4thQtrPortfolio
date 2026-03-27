@@ -99,9 +99,9 @@
 - Challenge: 
     * What changes that you have to do on the code that will position .notice box on the top right corner of the .content box? Please write the code on paper as well (both html and css on the part of .notice and .content).
     * Try to change the position of .content to relative then to fixed. What do you observed each time?
+    - When it is changed to relative, the content moves down. When it is changed to fixed, the content remains in the same position as in absolute positioning.
     * What do you observe on about the effect of z-index on .notice and .content boxes?
-
-    * 
+    - The z-index changes how the elements overlap or which element is behind/in front of another.
 
 3. Please answer the following reflection questions (15 minutes)
 
